@@ -1,24 +1,117 @@
-# Compiled class file
-*.class
+import java.util.Scanner;
 
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+public class project {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter your name and surname");
+        String name = scanner.nextLine();
+        System.out.println("Do you have a high school diploma?" + "\n" + "1 - Yes" + "\n" + "0 - No");
+        boolean bool = true;
+        int certificate = scanner.nextInt();
+        int val = (bool) ? 1 : 0;
+        System.out.println("What is your ort score?");
+        int ort = scanner.nextInt();
+        System.out.println("What is your level of English");
+        english();
+        int level = scanner.nextInt();
+        int count = 0;
+        while(count < 1) {
+            if(certificate == 0 || ort < 110) {
+                System.out.println("Unfortunately you cannot be accepted into our university.");
+                break;
+            }
+            if(certificate == 1 && ort > 110 && level < 3) {
+                System.out.println("Your level of English is insufficient." + "\n" + "You can take a one-year preparatory course in English and enter university in a year.");
+                break;
+            }
+            count++;
+        }
+        System.out.println("Everything is fine. You can enter our university. Here is a list of our specialties");
+        specialities();
+        int faculty = scanner.nextInt();
+        String speciality = "";
+        int fee = 0;
+        switch (faculty) {
+            case 1:
+                speciality = "Computer Engineering";
+                fee = 2500;
+                break;
+            case 2:
+                speciality = "Artificial Intelligence";
+                fee = 2200;
+                break;
+            case 3:
+                speciality = "Psychology";
+                fee = 1900;
+            case 4:
+                speciality = "Journalism";
+                fee = 1700;
+                break;
+            case 5:
+                speciality = "International Relations";
+                fee = 2200;
+                break;
+            case 6:
+                speciality = "Law";
+                fee = 1800;
+                break;
+            case 7:
+                speciality = "Management";
+                fee = 2200;
+                break;
+            case 8:
+                speciality = "Medicine";
+                fee = 3300;
+        }
+        int discount = discount(ort);
+        if(discount > 0) {
+            int discountfee = fee - (fee / 100 * discount);
+            System.out.println("Dear " + name + ", we congratulate you! You have been admitted to the " + speciality + " program at Ala-Too International University.");
+            System.out.println("The cost of your tuition with a " + discount + "% discount will be " + discountfee + "$ per year.");
+        }
+        else {
+            System.out.println("Dear " + name + ", we congratulate you! You have been admitted to the " + speciality + " program at Ala-Too International University.");
+            System.out.println("The cost of your tuition is " + fee + " per year.");
+        }
+    }
+    public static void english() {
+        System.out.println("1 - A1");
+        System.out.println("2 - A2");
+        System.out.println("3 - B1");
+        System.out.println("4 - B2");
+        System.out.println("5 - C1");
+        System.out.println("6 - C2");
+    }
+    public static void specialities() {
+        System.out.println("1 - Computer Engineering (2500$)");
+        System.out.println("2 - Artificial Intelligence (2200$)");
+        System.out.println("3 - Psychology (1900$)");
+        System.out.println("4 - Journalism (1700$)");
+        System.out.println("5 - International Relations (2200$)");
+        System.out.println("6 - Law (1800$)");
+        System.out.println("7 - Management (2200$)");
+        System.out.println("8 - Medicine (3300$)");
+    }
+    public static int discount(int ort) {
+        int percent = 0;
+        if(219 <= ort && ort <= 240) {
+            percent = 100;
+        }
+        if(210 <= ort && ort <= 218) {
+            percent = 75;
+        }
+        if(200 <= ort && ort <= 209) {
+            percent = 50;
+        }
+        if(175 <= ort && ort <= 199) {
+            percent = 25;
+        }
+        if(156 <= ort && ort <= 174) {
+            percent = 10;
+        }
+        if(140 <= ort && ort <= 155) {
+            percent = 5;
+        }
+        return percent;
+    }
+}
